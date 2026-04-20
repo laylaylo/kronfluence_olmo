@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=if_olmo_13B_data_0
+#SBATCH --job-name=if_olmo_13B_4_8
 #SBATCH --account=a0107
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -7,8 +7,8 @@
 #SBATCH --gpus-per-node=4
 #SBATCH --mem=450G
 #SBATCH --time=00:20:00
-#SBATCH --output=logs/if_olmo_13B_data_0_%j.out
-#SBATCH --error=logs/if_olmo_13B_data_0_%j.err
+#SBATCH --output=logs/if_olmo_13B_4_8_%j.out
+#SBATCH --error=logs/if_olmo_13B_4_8_%j.err
 
 #SBATCH --uenv=pytorch/v2.9.1:v2
 #SBATCH --view=default
@@ -42,7 +42,7 @@ DATA_PART=1
 
 FACTORS_NAME="exp1-${MODEL_SIZE}-factors"
 
-torchrun --standalone --nnodes=1 --nproc-per-node=4 /iopsstor/scratch/cscs/laylaylo/IF-MultiLingual/olmo_kronfluence/fit_factors.py \
+torchrun --standalone --nnodes=1 --nproc-per-node=4 /iopsstor/scratch/cscs/laylaylo/IF-MultiLingual/kronfluence_olmo/fit_factors.py \
     --model_size $MODEL_SIZE \
     --factors_name $FACTORS_NAME \
     --covariance_model_partitions $COV_MOD \

@@ -74,7 +74,7 @@ def get_olmino_dataset(
 
 def get_custom_dataset(
     model_size: str,
-    data_id: str
+    data_id: str,
     indices: List[int] = None,
 ) -> data.Dataset:
     model_name = MODEL_MAP[model_size]
