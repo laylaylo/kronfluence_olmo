@@ -2,10 +2,10 @@ import matplotlib.pyplot as plt
 import torch
 from transformers import AutoTokenizer
 
-from examples.openwebtext.pipeline import (
+from pipeline import (
     MODEL_NAME,
     get_custom_dataset,
-    get_openwebtext_dataset,
+    get_olmino_dataset,
 )
 from kronfluence.analyzer import Analyzer
 
@@ -14,12 +14,12 @@ def main():
     # scores = Analyzer.load_file("influence_results/openwebtext/scores_raw/pairwise_scores.safetensors")[
     #     "all_modules"
     # ].float()
-    scores = Analyzer.load_file("influence_results/scores_raw_margin_scores/pairwise_scores.safetensors")[
+    scores = Analyzer.load_file("/capstor/scratch/cscs/laylaylo/if_multilingual/kronfluence/exp1/OLMo-2-1B-Instruct/olmino-mix-run1-15k/scores_1B-data_0-raw/pairwise_scores.safetensors")[
         "all_modules"
     ].float()
 
-    train_dataset = get_openwebtext_dataset()
-    eval_dataset = get_custom_dataset()
+    train_dataset = get_olmino_dataset(model_size="1B")
+    eval_dataset = get_custom_dataset(model_size="1B", data_id="data_0")
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=True, trust_remote_code=True)
 
     eval_idx = 0

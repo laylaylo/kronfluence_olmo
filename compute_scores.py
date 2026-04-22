@@ -108,7 +108,7 @@ def main():
     full_output_dir = f"/capstor/scratch/cscs/laylaylo/if_multilingual/kronfluence/exp1/OLMo-2-{args.model_size}-Instruct"
     
     analyzer = Analyzer(
-        analysis_name=f"olmino-mix-run1-15k_{args.data_id}",
+        analysis_name=f"olmino-mix-run1-15k",
         model=model,
         task=task,
         profile=args.profile,
@@ -123,7 +123,7 @@ def main():
     score_args = extreme_reduce_memory_score_arguments(
         damping_factor=None, module_partitions=1, query_gradient_low_rank=rank, dtype=torch.bfloat16
     )
-    score_args.query_gradient_accumulation_steps = 10
+    score_args.query_gradient_accumulation_steps = 12 # Param change to get 82/4 query done faster
     # We can invest some time in getting more accurate SVD results.
     score_args.use_full_svd = True
     score_args.precondition_dtype = torch.float32
